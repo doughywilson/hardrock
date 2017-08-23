@@ -1,5 +1,9 @@
-import pandas as pd
-df = pd.read_csv('Hardrock 100 2017-elapsed-2017-08-15.csv')
+#Joey Wilson
 
-for col in df:
-    print col
+import pandas as pd
+import matplotlib as mpl
+import scipy as sp
+
+data = pd.read_csv('hardrock-elapsed-2017-08-15.csv')
+
+
