@@ -7,6 +7,7 @@ import scipy as sp
 import df_funcs as dff
 import glob
 
+#TODO: Update this glob wildcard to include 199* data
 filenames = glob.glob('data/2*')
 
 for fn in filenames:
@@ -20,7 +21,6 @@ for fn in filenames:
     firstHalf = data["Engineer In"]
     secondHalf = data["Finish"] - firstHalf
     place = data["Overall rank"]
-
 
     plt.plot(firstHalf, secondHalf, '.')
     # for k in range(firstHalf.size):
