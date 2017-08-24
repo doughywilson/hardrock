@@ -2,13 +2,23 @@
 
 
 import pandas as pd
-import matplotlib as mpl
+import matplotlib.pyplot as plt
 import scipy as sp
 
-data = pd.read_csv('data/hardrock-elapsed-2017-08-15.csv')
+data = pd.read_csv('data/2017.csv')
 
-#Find runners that finished in the bottom half early in the race
-data_early = data.sort_values("Maggie In")
-print data_early
+#Plot first half duration vs last half duration for each runner
 
+firstHalf = pd.to_timedelta(data["Engineer In"]) / sp.timedelta64(1,'h')
+secondHalf = pd.to_timedelta(data["Finish"]) / sp.timedelta64(1,'h') - firstHalf
+place = data["Overall rank"]
+
+
+plt.plot(firstHalf, secondHalf, '.')
+for k in range(firstHalf.size):
+    if firstHalf[k] < 100 and secondHalf[k] < 100:
+        plt.text(firstHalf[k], secondHalf[k], place[k])
+plt.axis([10, 30, 10, 30])
+plt.plot([0,100],[0,100],":")
+plt.show()
 
