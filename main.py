@@ -4,13 +4,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy as sp
+import df_funcs as dff
 
 data = pd.read_csv('data/2017.csv')
 
-#Plot first half duration vs last half duration for each runner
+# Get all timestamps into timedeltas
+dff.change_in_out_to_timedelta(data)
 
-firstHalf = pd.to_timedelta(data["Engineer In"]) / sp.timedelta64(1,'h')
-secondHalf = pd.to_timedelta(data["Finish"]) / sp.timedelta64(1,'h') - firstHalf
+#Plot first half duration vs last half duration for each runner
+firstHalf = data["Engineer In"]
+secondHalf = data["Finish"] - firstHalf
 place = data["Overall rank"]
 
 
@@ -20,5 +23,7 @@ for k in range(firstHalf.size):
         plt.text(firstHalf[k], secondHalf[k], place[k])
 plt.axis([10, 30, 10, 30])
 plt.plot([0,100],[0,100],":")
+plt.xlabel('1st Half time (h)')
+plt.ylabel('2nd Half time (h)')
 plt.show()
 
