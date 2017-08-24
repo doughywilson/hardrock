@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import scipy as sp
 import df_funcs as dff
 
-data = pd.read_csv('data/2016.csv')
+data = pd.read_csv('data/2013.csv')
 
 # Get all timestamps into timedeltas
 dff.change_in_out_to_timedelta(data)
@@ -25,5 +25,6 @@ plt.axis([10, 30, 10, 30])
 plt.plot([0,100],[0,100],":")
 plt.xlabel('1st Half time (h)')
 plt.ylabel('2nd Half time (h)')
+plt.grid("on")
 plt.show()
 
