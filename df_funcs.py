@@ -5,16 +5,21 @@ email: peterhillyard@gmail.com
 
 
 import pandas as pd
-import matplotlib as mpl
 import scipy as sp
-import datetime
 
 # This function changes the start, finish, in and out 
 # string times (xx:xx:xx) to datetime objects. This
 # function assumes that the string 'Start Offset' is
 # the first column where the string times begin and that
 # there are no other data types after that.
-def change_in_out_to_datetime(df,):
+#
+# Input:
+#    df - pandas dataframe
+#
+# Output:
+#    no output since df is an object that is changed in
+#    the function
+def change_in_out_to_timedelta(df,):
     # Get a list of all of the column names
     header_list = list(df.columns.values)
 
@@ -29,28 +34,6 @@ def change_in_out_to_datetime(df,):
     for datetime_str in datetime_str_headers_list:
         # Some rows do not have entries. These entries will throw an error
         # so 'coerce' will put a NaT object in these entries
-        print pd.to_datetime(df[datetime_str], errors='coerce')
-        quit()
-
-
-
-
-
-
-
-data = pd.read_csv('data/hardrock-elapsed-2017-08-15.csv')
-
-# Get string times to datetimes
-change_in_out_to_datetime(data)
-print data["Ouray In"][:5]
-quit()
-
-datetime_str = 'Ouray In'# 'Start Offset'
-data[datetime_str] = pd.to_datetime(data[datetime_str])
-quit()
-
-#Find runners that finished in the bottom half early in the race
-data_early = data.sort_values("Maggie In")
-print data_early
+        df[datetime_str] = pd.to_timedelta(df[datetime_str], errors='coerce', unit='h') / sp.timedelta64(1, 'h')
 
 
