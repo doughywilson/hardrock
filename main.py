@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import scipy as sp
 import df_funcs as dff
 
-data = pd.read_csv('data/2017.csv')
+data = pd.read_csv('data/2016.csv')
 
 # Get all timestamps into timedeltas
 dff.change_in_out_to_timedelta(data)
