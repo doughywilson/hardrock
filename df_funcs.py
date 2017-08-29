@@ -8,7 +8,7 @@ import pandas as pd
 import scipy as sp
 
 # This function changes the start, finish, in and out 
-# string times (xx:xx:xx) to datetime objects. This
+# string times (xx:xx:xx) to timedelta objects. This
 # function assumes that the string 'Start Offset' is
 # the first column where the string times begin and that
 # there are no other data types after that.
