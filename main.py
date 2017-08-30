@@ -14,6 +14,9 @@ for fn in filenames:
 
     data = pd.read_csv(fn)
 
+    #Drop any non-finishers for the sake of plotting first vs second half elapsed
+    data.dropna(how='any')
+
     # Get all timestamps into timedeltas
     dff.change_in_out_to_timedelta(data)
 
@@ -23,9 +26,10 @@ for fn in filenames:
     place = data["Overall rank"]
 
     plt.plot(firstHalf, secondHalf, '.')
-    # for k in range(firstHalf.size):
-    #     if firstHalf[k] < 100 and secondHalf[k] < 100:
-    #         plt.text(firstHalf[k], secondHalf[k], place[k])
+    for k in range(firstHalf.size):
+        # if firstHalf[k] < 100 and secondHalf[k] < 100:
+        if data["First name"][k] == "Anna" and data["Last name"][k] == "Frost":
+            plt.text(firstHalf[k], secondHalf[k], data["Finish"][k])
 
 plt.axis([10, 30, 10, 30])
 plt.plot([0,100],[0,100],":")
